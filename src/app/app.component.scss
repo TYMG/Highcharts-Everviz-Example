@@ -1,0 +1,23 @@
+.he-app {
+  padding: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: grey;
+  display: flex;
+  text-align: center;
+  &__HighChartsJs {
+    flex: 1 1 50%;
+
+    .HighChartsJs {
+      margin: 0 auto;
+    }
+  }
+
+  &__Everviz {
+    flex: 1 1 50%;
+  }
+}
+
+.vertLine {
+  border-right: 1px black;
+}
