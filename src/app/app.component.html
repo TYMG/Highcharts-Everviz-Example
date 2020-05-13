@@ -9,6 +9,68 @@
       [options]="options"
       style="width: 50%; height: 500px; display: block;"
     ></highcharts-chart>
+    <div>
+      <h2>Steps to implement:</h2>
+      <ol>
+        <li>
+          Install highcharts and highcharts angular node libraries <br />
+          <pre><code>npm install highcharts --save</code></pre>
+          <pre><code>npm install highcharts-angular --save</code></pre>
+        </li>
+        <li>
+          Add HighchartsChartModule to a Module's Import
+          <pre><code>
+            imports: [
+            BrowserModule,
+            ...,
+            HighchartsChartModule, <-- Add Me!
+            BrowserAnimationsModule,
+          ],
+          </code></pre>
+        </li>
+        <li>
+          In component template, add the following:
+          <pre><code>
+            &lt;highcharts-chart
+            class="HighChartsJs"
+            [Highcharts]="Highcharts"
+            [options]="options"
+            style="width: 50%; height: 500px; display: block;"
+          &gt;&lt;/highcharts-chart&gt;
+          </code></pre>
+        </li>
+        <li>
+          In component, add an options variable:
+          <pre><code>
+            options = &#123;
+              title: &#123; text: 'US Music Industry Revenue 2018', align: 'left', x: 10 &#125;,
+              subtitle: &#123; text: 'Source: RIAA', align: 'left', x: 10 &#125;
+              ...
+            &#125;
+          </code></pre>
+          Note: It is posible to export the options from an Everviz chart to use
+          to create HighChartsJS Charts.
+          <ol>
+            <li>
+              Within Everviz, click the graph whose options you want to export
+            </li>
+            <li>
+              On the graph view page, click the export button
+              <br />
+              <img src="assets/Click-Export.jpg" alt="" />
+            </li>
+            <li>
+              On the export modal, click the JSON tab, then click download.
+              Those options can easily be injected into options variable created
+              above
+              <br />
+              <img src="assets/Export-Options.jpg" alt="" />
+            </li>
+          </ol>
+        </li>
+        <li>Enjoy the rendered chart!!!</li>
+      </ol>
+    </div>
   </div>
   <mat-divider [vertical]="true"></mat-divider>
   <div class="he-app__Everviz">
@@ -17,7 +79,34 @@
       class="highcharts-iframe"
       [src]="iframe"
       title="Chart: Untitled Chart"
-      style="border: 0; width: 50%; height: 500px;"
+      style="
+        border: 0;
+        width: 50%;
+        height: 500px;
+        display: block;
+        margin: 0 auto;
+      "
     ></iframe>
+    <div>
+      <h2>Steps to implement:</h2>
+      <ol>
+        <li>
+          In Everbiz, generate a chart, once the chart is created and ready to
+          be published, click the 'Publish' button
+        </li>
+        <li>In the Publish pop-out, click the 'Publish' button</li>
+        <li>Click the embed radio button</li>
+        <li>Copy the link created</li>
+        <li>
+          The link can be pasted anywhere, CMS or HTML, but use the link in an
+          Angular project there are additional steps:
+          <ol>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ol>
+        </li>
+      </ol>
+    </div>
   </div>
 </div>
