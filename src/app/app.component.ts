@@ -1,7 +1,11 @@
 import { Component } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import * as Highcharts from 'highcharts';
+import HC_exporting from 'highcharts/modules/exporting';
+import HC_exportData from 'highcharts/modules/export-data';
 
+HC_exporting(Highcharts);
+HC_exportData(Highcharts);
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -28,13 +32,7 @@ export class AppComponent {
     },
     exporting: {},
     credits: { text: 'everviz.com', href: 'https://everviz.com' },
-    data: {
-      csv:
-        'Type;Percent\nStreaming;75\nPhysical;12\nDigital downloads;10\nSync;3',
-      googleSpreadsheetKey: false,
-      googleSpreadsheetWorksheet: false,
-      seriesMapping: [{ x: 0, y: 1 }],
-    },
+    data: {},
     colors: [
       '#235A61',
       '#DD495E',
@@ -62,8 +60,6 @@ export class AppComponent {
           {
             name: 'Streaming',
             y: 75,
-            sliced: true,
-            selected: true,
           },
           {
             name: 'Physical',
@@ -91,13 +87,12 @@ export class AppComponent {
     navigation: { events: {}, bindingsClassName: 'tools-container' },
   };
 
-  iframe;
+  iframe: SafeResourceUrl;
   constructor(private sanitzer: DomSanitizer) {}
 
   ngOnInit() {
     this.iframe = this.sanitzer.bypassSecurityTrustResourceUrl(
       'https://app.everviz.com/embed/ohcLpE5mM/'
     );
-    console.log(this.iframe);
   }
 }

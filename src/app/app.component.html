@@ -1,13 +1,14 @@
+<h1>HighCharts Everviz Integration With Angular</h1>
 <div class="he-app">
   <div class="he-app__HighChartsJs">
-    <h1>
+    <h2>
       Highcharts Graph
-    </h1>
+    </h2>
     <highcharts-chart
       class="HighChartsJs"
       [Highcharts]="Highcharts"
       [options]="options"
-      style="width: 50%; height: 500px; display: block;"
+      style="width: 50%; height: 400px; display: block;"
     ></highcharts-chart>
     <div>
       <h2>Steps to implement:</h2>
@@ -74,14 +75,14 @@
   </div>
   <mat-divider [vertical]="true"></mat-divider>
   <div class="he-app__Everviz">
-    <h1>Everviz</h1>
+    <h2>Everviz</h2>
     <iframe
       class="highcharts-iframe"
       [src]="iframe"
       title="Chart: Untitled Chart"
       style="
         border: 0;
-        width: 50%;
+        width: 53%;
         height: 500px;
         display: block;
         margin: 0 auto;
@@ -93,20 +94,77 @@
         <li>
           In Everbiz, generate a chart, once the chart is created and ready to
           be published, click the 'Publish' button
+          <img src="assets/Click-Everbiz-Publish.jpg" alt="" />
         </li>
-        <li>In the Publish pop-out, click the 'Publish' button</li>
-        <li>Click the embed radio button</li>
-        <li>Copy the link created</li>
         <li>
-          The link can be pasted anywhere, CMS or HTML, but use the link in an
-          Angular project there are additional steps:
-          <ol>
-            <li></li>
-            <li></li>
-            <li></li>
-          </ol>
+          In the Publish pop-out, click the 'Publish' button
+          <img src="assets/Publish-Chart.jpg" alt="" />
+        </li>
+        <li>Click the embed radio button</li>
+        <li>
+          Copy the link created
+          <br />
+          <img src="assets/Copy-Paste-Publish-Link.jpg" alt="" />
+        </li>
+        <li>
+          The link can be pasted anywhere, CMS or HTML
+        </li>
+      </ol>
+      <h3>
+        To use the link in an Angular project there are additional steps:
+      </h3>
+      <ol>
+        <li>
+          In the component that Chart is supposed be housed in, add the
+          DomSanitizer service to the constructor
+          <br />
+          <pre><code>
+                export class AppComponent &#123;
+                ...
+                constructor(private sanitzer: DomSanitizer) &#123;&#125;
+                ...
+                &#125;
+              </code></pre>
+        </li>
+        <li>
+          Additionally, in the component that Chart is supposed be housed in,
+          create a global variable with the SafeResourceUrl type
+          <pre><code>
+                iframe: SafeResourceUrl;
+              </code></pre>
+        </li>
+        <li>
+          In the ngOnInit function, use the DomSanitizer service to santize the
+          Everviz Chart Link
+          <br />
+          <pre><code>
+                ngOnInit() &#123;
+                  this.iframe = this.sanitzer.bypassSecurityTrustResourceUrl(
+                    'https://app.everviz.com/embed/ohcLpE5mM/' <-- Everviz Chart Link
+                  );
+                &#125;
+              </code></pre>
+        </li>
+        <li>
+          Finally in the html template add the following element:
+          <pre><code>
+             &lt;iframe
+            class="highcharts-iframe"
+            [src]="iframe"
+            title="Chart: Untitled Chart"
+            style="
+              border: 0;
+              width: 50%;
+              height: 500px;
+              display: block;
+              margin: 0 auto;
+            "
+          &gt; &lt;/iframe&gt;
+          </code></pre>
+          Note: The inline style can be changed, and it is not required.
         </li>
       </ol>
     </div>
   </div>
 </div>
+<h1>Happy Charting!!!!</h1>
